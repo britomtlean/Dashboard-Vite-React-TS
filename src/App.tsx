@@ -10,11 +10,11 @@ function App() {
 
     if (!context) return null;
 
-    const { message } = context;
+    const { message, user } = context;
 
     return (
         <>
-            <Home nome="Leandro" id={67}>
+            <Home nome={user} id={67}>
                 <h1 className='animate-bounce m-4'>{message}</h1>
                 <Outlet />
             </Home>

@@ -15,7 +15,8 @@ const Home = ({ nome, id, children }: Props) => {
     //const context = useContext(Context);
     //if (!context) return null;
 
-    const { theme, setTheme, status, setStatus } = useContext(Context)!;
+    const { theme } = useContext(Context)!;
+
 
     //setTheme('dark')
 
@@ -42,6 +43,9 @@ const Home = ({ nome, id, children }: Props) => {
                     <Link className="bg-slate-300 p-2 rounded-2xl w-25 text-center" to={'/api/dadosapi'}>
                         Dados API
                     </Link>
+                    <Link className="bg-slate-300 p-2 rounded-2xl w-25 text-center" to={`/socket/?user=${nome}`}>
+                        Socket
+                    </Link>
                 </nav>
                 <ul className="flex flex-row gap-4 items-center justify-center text-white font-black">
                     <li>{nome}</li>
@@ -51,7 +55,7 @@ const Home = ({ nome, id, children }: Props) => {
 
             <div
                 className={`flex flex-col justify-center items-center w-full min-h-screen ${
-                    theme === 'default' ? 'bg-gray-500' : 'bg-gray-900'
+                    theme === 'Default' ? 'bg-gray-500' : 'bg-gray-900'
                 }`}
             >
                 {children}

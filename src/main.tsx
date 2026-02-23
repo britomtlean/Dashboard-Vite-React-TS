@@ -9,9 +9,11 @@ import Ref from './components/Ref.tsx';
 import Search from './components/Search.tsx';
 import State from './components/State.tsx';
 //CONTEXT
-import { ContextProvider } from './context/ContextProvider.tsx';
+import { ContextProvider } from './context/ContextProvider';
 import Effect from './components/Effect.tsx';
 import DadosAPI from './components/DadosAPI.tsx';
+import Socket from './components/Socket.tsx';
+import Calculos from './components/Calculos.tsx';
 
 let router = createBrowserRouter([
     {
@@ -37,6 +39,14 @@ let router = createBrowserRouter([
             {
                 path: '/api/dadosapi',
                 element: <DadosAPI />,
+            },
+            {
+                path: '/socket/',
+                element: <Socket />,
+            },
+            {
+                path: '/calculos',
+                element: <Calculos />,
             },
         ],
     },

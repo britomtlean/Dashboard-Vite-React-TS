@@ -8,6 +8,8 @@ export type ContextType = {
     setStatus: React.Dispatch<React.SetStateAction<boolean>>;
     message: string;
     setMessage: React.Dispatch<React.SetStateAction<string>>;
+    user: string;
+    setUser: React.Dispatch<React.SetStateAction<string>>;
 };
 
 //function createContext<T>(defaultValue: T): React.Context<T>
@@ -19,12 +21,13 @@ export const Context: React.Context<ContextType | null> = createContext<ContextT
 
 export const ContextProvider = ({ children }: PropsWithChildren) => {
 
-    const [theme, setTheme] = useState<string>('default');
+    const [theme, setTheme] = useState<string>('Default');
     const [status, setStatus] = useState<boolean>(true);
     const [message, setMessage] = useState<string>('Hello Context');
+    const [user, setUser] = useState<string>('Default');
 
     return (
-        <Context.Provider value={{ theme, setTheme, status, setStatus, message, setMessage }}>
+        <Context.Provider value={{ theme, setTheme, status, setStatus, message, setMessage, user, setUser }}>
             {children}
         </Context.Provider>
     );

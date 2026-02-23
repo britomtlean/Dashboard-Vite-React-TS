@@ -1,0 +1,26 @@
+                        const oldMessages: string | null = localStorage.getItem('private');
+                        // 2️⃣ Adiciona nova mensagem (msg pode ser objeto ou array)
+                        if(!oldMessages){
+                            console.log('if');
+                            const updatedMessages = msg;
+                            localStorage.setItem('private', JSON.stringify(updatedMessages));
+                            const chat: Array<object> = JSON.parse(
+                                localStorage.getItem('private')!
+                            );
+                            setPrivChat(chat);
+
+                        }
+                        else{
+                            console.log("else")
+                            const arrayMessage = JSON.parse(oldMessages)
+                            const updatedMessages = [...arrayMessage, ...msg];
+                            // se msg for objeto único use: [...oldMessages, msg]
+
+                            // 3️⃣ Salva novamente
+                            localStorage.setItem('private', JSON.stringify(updatedMessages));
+                            const chat: Array<object> = JSON.parse(
+                                localStorage.getItem('private')!
+                            );
+                            //setPrivChat((prev)=>([...prev!, msg]));
+                            setPrivChat(chat);
+                        }
