@@ -1,19 +1,13 @@
 @import 'tailwindcss';
 
-#root {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-    align-items: center;
-    min-width: 320px;
-    min-height: 100vh;
+*{
+    overflow-y: hidden;
 }
 
-h1 {
-    font-size: 3.2em;
-    line-height: 1.1;
-    color: white;
+#root {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
 }
 
 button {
@@ -27,9 +21,11 @@ button {
     cursor: pointer;
     transition: border-color 0.25s;
 }
+
 button:hover {
     border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;

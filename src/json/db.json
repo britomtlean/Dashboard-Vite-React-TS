@@ -1,0 +1,4 @@
+{
+    "users": [{ "id": 1, "name": "Leandro", "email": "lea@email.com", "role": "admin" }],
+    "products": [{ "id": 1, "name": "Mouse Gamer", "price": 120 }]
+}

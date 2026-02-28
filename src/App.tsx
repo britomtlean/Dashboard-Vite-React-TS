@@ -6,17 +6,12 @@ import { Context } from './context/ContextProvider';
 
 function App() {
 
-    const context = useContext(Context);
-
-    if (!context) return null;
-
-    const { message, user } = context;
+    const { user } = useContext(Context)!;
 
     return (
         <>
-            <Home nome={user} id={67}>
-                <h1 className='animate-bounce m-4'>{message}</h1>
-                <Outlet />
+            <Home nome={user}>
+                    <Outlet />
             </Home>
         </>
     );

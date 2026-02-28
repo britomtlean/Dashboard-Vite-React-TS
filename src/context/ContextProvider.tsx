@@ -1,11 +1,9 @@
 import { useState, createContext } from 'react';
-import type { PropsWithChildren } from 'react'; //TIPAGEM DE PROP
+import type { PropsWithChildren } from 'react'; //TIPAGEM PARA PROP
 
 export type ContextType = {
-    theme: string;
-    setTheme: React.Dispatch<React.SetStateAction<string>>;
-    status: boolean;
-    setStatus: React.Dispatch<React.SetStateAction<boolean>>;
+    theme: boolean;
+    setTheme: React.Dispatch<React.SetStateAction<boolean>>;
     message: string;
     setMessage: React.Dispatch<React.SetStateAction<string>>;
     user: string;
@@ -21,13 +19,12 @@ export const Context: React.Context<ContextType | null> = createContext<ContextT
 
 export const ContextProvider = ({ children }: PropsWithChildren) => {
 
-    const [theme, setTheme] = useState<string>('Default');
-    const [status, setStatus] = useState<boolean>(true);
+    const [theme, setTheme] = useState<boolean>(false);
     const [message, setMessage] = useState<string>('Hello Context');
     const [user, setUser] = useState<string>('Default');
 
     return (
-        <Context.Provider value={{ theme, setTheme, status, setStatus, message, setMessage, user, setUser }}>
+        <Context.Provider value={{ theme, setTheme, message, setMessage, user, setUser }}>
             {children}
         </Context.Provider>
     );

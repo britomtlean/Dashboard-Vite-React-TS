@@ -1,19 +1,18 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+//ROUTER
 import { createBrowserRouter, RouterProvider } from 'react-router';
 //CSS
 import './index.css';
 //COMPONENTS
 import App from './App.tsx';
 import Ref from './components/Ref.tsx';
-import Search from './components/Search.tsx';
 import State from './components/State.tsx';
+import Effect from './components/Effect.tsx';
+import Socket from './components/Socket.tsx';
+import Tarefas from './components/Tarefas.tsx';
 //CONTEXT
 import { ContextProvider } from './context/ContextProvider';
-import Effect from './components/Effect.tsx';
-import DadosAPI from './components/DadosAPI.tsx';
-import Socket from './components/Socket.tsx';
-import Calculos from './components/Calculos.tsx';
 
 let router = createBrowserRouter([
     {
@@ -29,24 +28,16 @@ let router = createBrowserRouter([
                 element: <Ref />,
             },
             {
-                path: '/search',
-                element: <Search />,
-            },
-            {
                 path: '/effect',
                 element: <Effect />,
-            },
-            {
-                path: '/api/dadosapi',
-                element: <DadosAPI />,
             },
             {
                 path: '/socket/',
                 element: <Socket />,
             },
             {
-                path: '/calculos',
-                element: <Calculos />,
+                path: '/tarefas/',
+                element: <Tarefas />,
             },
         ],
     },
