@@ -46,36 +46,31 @@ const Home = ({ nome, children }: Props) => {
                         <Link
                             className="w-full border-b py-3 text-center bg-gray-300"
                             to={'/effect'}
-                            onClick={() => setMenu(false)}
-                        >
-                            UseEffect
+                            onClick={() => setMenu(false)}>
+                            useEffect
                         </Link>
                         <Link
                             className="w-full border-b py-3 text-center bg-gray-300"
                             to={'/state'}
-                            onClick={() => setMenu(false)}
-                        >
-                            UseState
+                            onClick={() => setMenu(false)}>
+                            useState
                         </Link>
                         <Link
                             className="w-full border-b py-3 text-center bg-gray-300"
                             to={'/ref'}
-                            onClick={() => setMenu(false)}
-                        >
-                            UseRef
+                            onClick={() => setMenu(false)}>
+                            useRef
                         </Link>
                         <Link
                             className="w-full border-b py-3 text-center bg-gray-300"
                             to={'/socket'}
-                            onClick={() => setMenu(false)}
-                        >
+                            onClick={() => setMenu(false)} >
                             Bate Papo
                         </Link>
                         <Link
                             className="w-full border-b py-3 text-center bg-gray-300"
                             to={'/tarefas'}
-                            onClick={() => setMenu(false)}
-                        >
+                            onClick={() => setMenu(false)}>
                             Tarefas
                         </Link>
                     </div>

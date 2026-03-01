@@ -1,27 +1,26 @@
-import { useState, useRef , useContext} from 'react';
+import { useState, useRef, useContext, useEffect} from 'react';
 import { Context } from '../context/ContextProvider';
+import { Task } from '../data/Task';
 
-type Task = {
-    id?: number,
-    user: string,
+type TaskModel = {
     desc: string
 }
 
 const Tarefas = () => {
 
-////////////////////CONTEXT////////////////
-    const { user } = useContext(Context)!;
-//////////////////////////////////////////
+    //CONTEXT
+    const { cpf } = useContext(Context)!;
 
-    //ref
+    //REF
     const refTask = useRef<HTMLInputElement | null>(null);
 
-    //state
-    const [tasks, setTasks] = useState<Array<Task> | null>(null);
+    //STATE
+    const [tasks, setTasks] = useState<Array<TaskModel>>([]);
 
-    //functions
+    //FUNCTIONS
     const addTask = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
         if (!refTask.current?.value){
             return alert('Inseira um valor')
         }
@@ -29,21 +28,27 @@ const Tarefas = () => {
             console.log('Task inserida:', refTask.current?.value);
 
             if(!prev){
-                const newTask: Task = {
-                    user: user,
+                const newTask: TaskModel = {
                     desc: refTask.current?.value!,
                 };
                 return [newTask]
             }
-            const newTask: Task = {
-                user: user,
+            const newTask: TaskModel = {
                 desc: refTask.current?.value!,
             };
-            const newTasks : Array<Task> = [...prev, newTask!];
+            const newTasks : Array<TaskModel> = [...prev, newTask!];
             console.log('Todas as tarefas:', newTasks);
             return newTasks;
         });
     };
+    //////////////////////////////////////////////////
+
+    //////////////////EFFECT/////////////////////////////
+    useEffect(()=>{
+        Task.getTask({cpf: cpf})
+        .then((data)=> {console.log('then'), setTasks(data)})
+        .catch((er)=>console.error(er))
+    },[])
 
     return (
         <div className="w-full h-full flex flex-col gap-6 justify-start items-center">
@@ -86,7 +91,6 @@ const Tarefas = () => {
                                 flex justify-between items-center w-full
                                 bg-gray-50
                                 px-4 py-3
-                                rounded-xl
                                 border border-gray-200
                                 hover:bg-gray-100
                                 transition
