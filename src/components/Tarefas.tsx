@@ -22,9 +22,22 @@ const Tarefas = () => {
         if (!refTask.current?.value){
             return alert('Inseira um valor')
         }
-        setTasks((prev) => {
+
             console.log('Task inserida:', refTask.current?.value);
 
+                const newTask: TaskModel = {
+                    desc: refTask.current?.value!,
+                };
+
+                Task.createTask(newTask).then(()=>{
+                    Task.getTask()
+                        .then((data) => {
+                            setTasks(data);
+                        })
+                        .catch((er) => console.error(er));
+                })
+
+            /*
             if(!prev){
                 const newTask: TaskModel = {
                     desc: refTask.current?.value!,
@@ -37,7 +50,7 @@ const Tarefas = () => {
             const newTasks : Array<TaskModel> = [...prev, newTask!];
             console.log('Todas as tarefas:', newTasks);
             return newTasks;
-        });
+            */
     };
     //////////////////////////////////////////////////
 
@@ -54,9 +67,7 @@ const Tarefas = () => {
             <h1 className="font-semibold text-black text-4xl">Tarefas</h1>
             <form
                 className="flex justify-center items-center gap-4 "
-                onSubmit={(e) => {
-                    addTask(e);
-                }}
+                onSubmit={(e) => {addTask(e)}}
             >
                 <input
                     type="text"
@@ -70,6 +81,7 @@ const Tarefas = () => {
                         transition
                         duration-200
                         "
+                        placeholder='Digite aqui sua tarefa'
                 />
                 <input
                     type="submit"

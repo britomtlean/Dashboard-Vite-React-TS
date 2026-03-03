@@ -19,13 +19,11 @@ const Socket = () => {
 
     const [privChat, setPrivChat] = useState<Array<object> | null>(null);
 
+    /*
     useEffect(() => {
-
         setMessage("Socket.IO")
-
         console.log(privChat);
         WebSocket.connection(user!); //REALIZA CONEXÃO
-
         WebSocket.getSocket(
             (msg) => {
                 console.log('Mensagem recebida: ', msg);
@@ -69,14 +67,15 @@ const Socket = () => {
             }
         );
     }, []);
+    */
 
     return (
         <>
             <form
-                className="flex flex-col gap-4 justify-center items-center w-[30vw]"
+                className="w-full flex flex-col gap-4 justify-center items-center"
                 onSubmit={(e) => {
                     e.preventDefault();
-                    WebSocket.sendMessage(user!, SendMessage, sendUser);
+                    //WebSocket.sendMessage(user!, SendMessage, sendUser);
                     setSendMessage('');
                 }}
             >
@@ -107,7 +106,7 @@ const Socket = () => {
 
             <h1 className="text-[2rem]! text-black! my-3">Mensagens</h1>
 
-            <div className="flex flex-col items-center w-[40vw] max-h-[300px] overflow-y-scroll">
+            <div className="w-full max-h-[300px] flex flex-col items-center overflow-y-scroll">
                 {!privChat
                     ? 'Não há mensagens disponíveis'
                     : privChat?.map((msg: any, index: number) => (
