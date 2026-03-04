@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { Context } from '../context/ContextProvider';
+import { Context } from '../../context/ContextProvider';
 
 const Effect = () => {
     const [count, setCount] = useState<number>(1);

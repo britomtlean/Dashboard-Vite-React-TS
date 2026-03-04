@@ -16,9 +16,15 @@ function App() {
 
     return (
         <>
-            <Home user={user}>
-                <Outlet />
-            </Home>
+            {!user ? (
+                <div className="bg-slate-400 h-screen w-full justify-center items-center flex self-center">
+                    <h1 className="font-mono animate-pulse text-2xl">Carregando...</h1>
+                </div>
+            ) : (
+                <Home user={user}>
+                    <Outlet />
+                </Home>
+            )}
         </>
     );
 }

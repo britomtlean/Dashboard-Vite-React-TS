@@ -6,12 +6,15 @@ import { createBrowserRouter, RouterProvider } from 'react-router';
 import './index.css';
 //COMPONENTS
 import App from './App.tsx';
-import Ref from './components/Ref.tsx';
-import State from './components/State.tsx';
-import Effect from './components/Effect.tsx';
-import Socket from './components/Socket.tsx';
+
+//Hooks
+import Ref from './components/Hooks/Ref.tsx';
+import State from './components/Hooks/State.tsx';
+import Effect from './components/Hooks/Effect.tsx';
+
 import Tarefas from './components/Tarefas.tsx';
 import Login from './components/Login.tsx';
+import Cadastro from './components/Cadastro.tsx';
 //CONTEXT
 import { ContextProvider } from './context/ContextProvider';
 
@@ -19,6 +22,10 @@ let router = createBrowserRouter([
     {
         path: '/Login',
         element: <Login />,
+    },
+    {
+        path: '/Cadastro',
+        element: <Cadastro />,
     },
     {
         path: '/',
@@ -35,10 +42,6 @@ let router = createBrowserRouter([
             {
                 path: '/effect',
                 element: <Effect />,
-            },
-            {
-                path: '/socket/',
-                element: <Socket />,
             },
             {
                 path: '/tarefas/',

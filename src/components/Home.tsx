@@ -1,7 +1,9 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+
+//ICONS
 import { VscColorMode } from 'react-icons/vsc';
-import { FaBeer } from 'react-icons/fa';
+import { FaBeer, FaUser } from 'react-icons/fa';
 
 //CONTEXT
 import { Context } from '../context/ContextProvider';
@@ -47,35 +49,28 @@ const Home = ({ user, children }: Props) => {
                 >
                     <div className="w-full min-h-full flex flex-col justify-center items-center">
                         <Link
-                            className="w-full border-b py-3 text-center bg-gray-300"
+                            className="w-full border-b py-3 text-center bg-gray-100"
                             to={'/effect'}
                             onClick={() => setMenu(false)}
                         >
                             useEffect
                         </Link>
                         <Link
-                            className="w-full border-b py-3 text-center bg-gray-300"
+                            className="w-full border-b py-3 text-center bg-gray-100"
                             to={'/state'}
                             onClick={() => setMenu(false)}
                         >
                             useState
                         </Link>
                         <Link
-                            className="w-full border-b py-3 text-center bg-gray-300"
+                            className="w-full border-b py-3 text-center bg-gray-100"
                             to={'/ref'}
                             onClick={() => setMenu(false)}
                         >
                             useRef
                         </Link>
                         <Link
-                            className="w-full border-b py-3 text-center bg-gray-300"
-                            to={'/socket'}
-                            onClick={() => setMenu(false)}
-                        >
-                            Bate Papo
-                        </Link>
-                        <Link
-                            className="w-full border-b py-3 text-center bg-gray-300"
+                            className="w-full border-b py-3 text-center bg-gray-100"
                             to={'/tarefas'}
                             onClick={() => setMenu(false)}
                         >
@@ -85,11 +80,12 @@ const Home = ({ user, children }: Props) => {
                 </nav>
 
                 <div>
-                    <VscColorMode className="text-3xl text-gray-800" onClick={alterTheme} />
+                    <VscColorMode className="text-2xl text-white" onClick={alterTheme} />
                 </div>
 
                 <div className="flex flex-row gap-4 items-center justify-center text-white font-black">
-                    <h2>{user?.nome ?? "Default"}</h2>
+                    <FaUser className='text-2xl' />
+                    <h2 className='hidden md:block'>{user?.nome ?? 'Default'}</h2>
                 </div>
             </header>
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { ChangeEvent, FormEvent  } from 'react'
 import { FetchLogin } from '../data/FetchLogin';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 type LoginPayload = {
     cpf: string;
@@ -43,8 +43,11 @@ const Login = () => {
     }, []);
 
     return (
-        <div className="w-screen h-screen flex items-center justify-center bg-linear-to-br from-gray-700 to-gray-500 px-4">
-            <div className="bg-white w-full max-w-md p-8 rounded-2xl shadow-2xl">
+        <div className="w-screen h-screen flex items-center justify-center bg-linear-to-br from-gray-700 to-gray-500 px-[10vw]">
+            <div
+                className="w-full max-w-md p-8 rounded-2xl shadow-lg
+                 bg-white/10 backdrop-blur-md"
+            >
                 <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Login</h1>
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5">
@@ -70,6 +73,8 @@ const Login = () => {
                     >
                         Entrar
                     </button>
+
+                    <Link to={'/cadastro'} className='text-white font-light decoration-zinc-400 underline'>Não possui cadastro?</Link>
                 </form>
             </div>
         </div>

@@ -2,7 +2,9 @@ import { useState, useRef, useEffect} from 'react';
 import { Task } from '../data/Task';
 
 type TaskModel = {
+    id?: number,
     desc: string
+    status?: boolean
 }
 
 const Tarefas = () => {
@@ -13,14 +15,16 @@ const Tarefas = () => {
     //STATE -- Tarefas armazenadas
     const [tasks, setTasks] = useState<Array<TaskModel>>([]);
 
-    ////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////
 
     //FUNCTIONS
     const addTask = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (!refTask.current?.value){
-            return alert('Inseira um valor')
+        const refTaskClean = refTask.current?.value.trim();
+
+        if (!refTask.current?.value || !refTaskClean) {
+            return alert('Inseira um valor');
         }
 
             console.log('Task inserida:', refTask.current?.value);
@@ -31,34 +35,33 @@ const Tarefas = () => {
 
                 Task.createTask(newTask).then(()=>{
                     Task.getTask()
-                        .then((data) => {
-                            setTasks(data);
-                        })
-                        .catch((er) => console.error(er));
+                        .then(data => setTasks(data))
+                        .catch(er => console.error(er));
                 })
 
-            /*
-            if(!prev){
-                const newTask: TaskModel = {
-                    desc: refTask.current?.value!,
-                };
-                return [newTask]
-            }
-            const newTask: TaskModel = {
-                desc: refTask.current?.value!,
-            };
-            const newTasks : Array<TaskModel> = [...prev, newTask!];
-            console.log('Todas as tarefas:', newTasks);
-            return newTasks;
-            */
+        refTask.current.value = ''
+    }
+
+    const handleDelete =  (id: number) => {
+        Task.deleteTask(id)
+        .then(() => {Task.getTask().then(data => setTasks(data))})
+        .catch(er => console.error(er))
+    }
+
+    const handleUpdate = (id: number) => {
+        Task.updateTask(id)
+            .then(() => {
+                Task.getTask().then((data) => setTasks(data));
+            })
+            .catch((er) => console.error(er));
     };
-    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
 
     //EFFECT
     useEffect(()=>{
         Task.getTask()
-        .then((data)=> { setTasks(data)})
-        .catch((er)=>console.error(er))
+        .then(data => {setTasks(data)})
+        .catch(er => console.error(er))
     },[])
     ///////////////////////////////////////////////////
 
@@ -66,8 +69,11 @@ const Tarefas = () => {
         <div className="w-full h-full flex flex-col gap-6 justify-start items-center">
             <h1 className="font-semibold text-black text-4xl">Tarefas</h1>
             <form
-                className="flex justify-center items-center gap-4 "
-                onSubmit={(e) => {addTask(e)}}
+                className="w-full flex justify-center items-center gap-4
+                md:w-1/2"
+                onSubmit={(e) => {
+                    addTask(e);
+                }}
             >
                 <input
                     type="text"
@@ -81,7 +87,7 @@ const Tarefas = () => {
                         transition
                         duration-200
                         "
-                        placeholder='Digite aqui sua tarefa'
+                    placeholder="Digite aqui sua tarefa"
                 />
                 <input
                     type="submit"
@@ -92,24 +98,41 @@ const Tarefas = () => {
 
             <ul className="w-full md:w-1/2">
                 <div className="w-full">
-                    {!tasks ? (
-                        <h1>Nenhuma tarefa disponível</h1>
+                    {tasks.length === 0 ? (
+                        <h1 className="text-center mt-10">Nenhuma tarefa disponível</h1>
                     ) : (
-                        tasks.map((task, index) => (
-                            <li
-                                key={index}
-                                className="
-                                flex justify-between items-center w-full
-                                bg-gray-50
-                                px-4 py-3
-                                border border-gray-200
-                                hover:bg-gray-100
-                                transition
-                                duration-200
-                            "
+                        tasks.map((task) => (
+                            <div
+                                className="flex m-0.5 flex-col mb-4
+                                            md:flex-row md:mb-0"
+                                key={task.id}
                             >
-                                {task.desc}
-                            </li>
+                                <li
+                                    className={`
+                                        flex justify-between items-center w-full
+                                        px-4 py-3
+                                        border border-gray-200
+                                        hover:bg-gray-100
+                                        transition
+                                        duration-200
+                                        ${task.status ? 'bg-teal-200' : 'bg-amber-100'}
+                                    `}
+                                >
+                                    {task.desc}
+                                </li>
+                                <input
+                                    type="submit"
+                                    className="bg-[#a50d38] text-white py-2 p-4 rounded cursor-pointer border-gray-300 mr-0.5"
+                                    onClick={() => handleDelete(task.id!)}
+                                    value="Remover"
+                                />
+                                <input
+                                    type="submit"
+                                    className="bg-[#07815f] text-white py-2 p-4 rounded cursor-pointer border-gray-300"
+                                    onClick={() => handleUpdate(task.id!)}
+                                    value="Concluir"
+                                />
+                            </div>
                         ))
                     )}
                 </div>

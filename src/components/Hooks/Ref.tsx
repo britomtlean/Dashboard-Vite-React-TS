@@ -1,7 +1,7 @@
 //Tipagem usando useRef com elementos HTML
 
 import { useRef, useContext } from 'react';
-import { Context } from '../context/ContextProvider';
+import { Context } from '../../context/ContextProvider';
 
 const Ref = () => {
 

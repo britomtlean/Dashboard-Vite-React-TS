@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { Context } from '../context/ContextProvider';
+import { Context } from '../../context/ContextProvider';
 
 const State = () => {
     const [count, setCount] = useState<number>(0);
