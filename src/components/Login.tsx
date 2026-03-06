@@ -56,7 +56,7 @@ const Login = () => {
                         placeholder="Insira o CPF"
                         value={cpf}
                         onChange={handleCPFChange}
-                        className="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                        className="p-3 rounded-lg border border-gray-300 focus:outline-none focus:bg-white/40 transition"
                     />
 
                     <input
@@ -64,7 +64,7 @@ const Login = () => {
                         placeholder="Insira a senha"
                         value={password}
                         onChange={handlePasswordChange}
-                        className="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                        className="p-3 rounded-lg border border-gray-300 focus:ring-2 focus:bg-white/40 transition"
                     />
 
                     <button

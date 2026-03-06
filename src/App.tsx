@@ -20,7 +20,7 @@ function App() {
 
             if (user) return;
 
-            const redirect = setTimeout(() => {navigate('/login')}, 3000);
+            const redirect = setTimeout(() => {navigate('/login')}, 10000);
 
             return () => clearInterval(redirect)
 
