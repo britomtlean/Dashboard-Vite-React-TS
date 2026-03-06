@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect} from 'react';
 import { Task } from '../data/Task';
+import { FaCircleCheck } from 'react-icons/fa6';
 
 type TaskModel = {
     id?: number,
@@ -97,7 +98,7 @@ const Tarefas = () => {
             </form>
 
             <ul className="w-full h-full md:w-1/2">
-                <div className="w-full h-full max-h-150 overflow-y-scroll!">
+                <div className="w-full h-full max-h-2/3 overflow-y-scroll!">
                     {tasks.length === 0 ? (
                         <h1 className="text-center mt-10">Nenhuma tarefa disponível</h1>
                     ) : (
@@ -119,19 +120,22 @@ const Tarefas = () => {
                                     `}
                                 >
                                     {task.desc}
+                                    <FaCircleCheck className={`${task.status ? 'block text-purple-700' : 'hidden'}`} />
                                 </li>
-                                <input
-                                    type="submit"
-                                    className="bg-[#a50d38] text-white py-2 p-4 rounded cursor-pointer border-gray-300 mr-0.5"
-                                    onClick={() => handleDelete(task.id!)}
-                                    value="Remover"
-                                />
-                                <input
-                                    type="submit"
-                                    className="bg-[#07815f] text-white py-2 p-4 rounded cursor-pointer border-gray-300"
-                                    onClick={() => handleUpdate(task.id!)}
-                                    value="Concluir"
-                                />
+                                <div className='w-full flex'>
+                                    <input
+                                        type="submit"
+                                        className="bg-[#a50d38] flex-1 text-white py-2 p-4 rounded cursor-pointer border-gray-300 mr-0.5"
+                                        onClick={() => handleDelete(task.id!)}
+                                        value="Remover"
+                                    />
+                                    <input
+                                        type="submit"
+                                        className="bg-[#07815f] flex-1 text-white py-2 p-4 rounded cursor-pointer border-gray-300"
+                                        onClick={() => handleUpdate(task.id!)}
+                                        value="Concluir"
+                                    />
+                                </div>
                             </div>
                         ))
                     )}
