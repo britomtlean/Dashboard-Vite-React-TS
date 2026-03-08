@@ -40,9 +40,6 @@ const Welcome = () => {
                 {message}
             </h1>
             <h1 className="font-bold text-3xl">{user?.nome}</h1>
-            <div className="p-4">
-
-            </div>
         </div>
     );
 };

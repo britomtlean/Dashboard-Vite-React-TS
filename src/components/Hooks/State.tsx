@@ -13,7 +13,8 @@ const State = () => {
                         focus:ring-2 focus:ring-cyan-500
                         focus:border-white
                         transition
-                        duration-200"
+                        duration-200
+                        md:w-1/4"
                 onClick={() => {
                     setCount(count + 1);
                 }}

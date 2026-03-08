@@ -18,7 +18,7 @@ type Props = {
     children?: ReactNode;
 };
 
-const Home = ({ user, children }: Props) => {
+const Home = ({ children }: Props) => {
     //CONTEXT
     const { theme, setTheme } = useContext(Context)!;
 
@@ -76,13 +76,11 @@ const Home = ({ user, children }: Props) => {
                     <h1 className="font-black text-white">Theme</h1>
                 </button>
 
-                <div
-                    data-element="User"
-                    className="flex flex-row gap-4 items-center justify-center text-white font-black"
+                <button data-element="User"
+                    className="flex flex-row gap-4 items-center justify-center text-white font-black p-4 bg-gray-400/60 rounded-[100%] focus:bg-slate-600"
                 >
                     <FaUser className="text-2xl" />
-                    <h2 className="hidden md:block">{user?.nome ?? 'Default'}</h2>
-                </div>
+                </button>
             </header>
 
             <div
