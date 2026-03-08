@@ -91,7 +91,7 @@ const Home = ({ children }: Props) => {
             ></div>
 
             <main
-                className={`flex-1 w-screen min-h-screen py-4 px-[1vw] flex flex-col justify-start items-center
+                className={`flex-1 w-screen min-h-screen py-4 px-[5vw] flex flex-col justify-start items-center
                 transform transition-all delay-300 ease-in-out
                 ${!theme ? 'bg-gray-400' : 'bg-gray-700'}
                 md:px-[10xw]`}
