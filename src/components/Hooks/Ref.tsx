@@ -22,7 +22,6 @@ const Ref = () => {
 
     return (
         <>
-            <h1>{message}</h1>
             <input
                 type="text"
                 name="text"
@@ -43,6 +42,7 @@ const Ref = () => {
             >
                 Alterar Menssagem
             </button>
+            <h1 className="font-mono text-3xl mt-8">{message}</h1>
         </>
     );
 };

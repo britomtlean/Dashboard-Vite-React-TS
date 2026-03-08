@@ -38,12 +38,14 @@ const Home = ({ user, children }: Props) => {
     return (
         <>
             <header className="w-screen min-h-20 flex justify-between items-center bg-linear-to-br from-gray-700 to-gray-500 px-[10vw] z-50">
-                <div className="p-3 hover:bg-blue-100/10 hover:border/5">
+
+                <button data-element= "Menu"
+                className="p-3 hover:bg-blue-100/10 hover:border/5">
                     <GiHamburgerMenu
                         className="text-3xl text-white hover:pointer "
                         onClick={clickMenu}
                     ></GiHamburgerMenu>
-                </div>
+                </button>
 
                 <nav
                     className={`absolute top-20 left-0 w-3/5 min-h-full bg-gray-700/90 z-50
@@ -71,12 +73,14 @@ const Home = ({ user, children }: Props) => {
                     </div>
                 </nav>
 
-                <div className="flex gap-4">
+                <button data-element="Theme"
+                 className="flex gap-4">
                     <VscColorMode className="text-2xl text-white" onClick={alterTheme} />
                     <h1 className="font-black text-white">Theme</h1>
-                </div>
+                </button>
 
-                <div className="flex flex-row gap-4 items-center justify-center text-white font-black">
+                <div data-element="User"
+                    className="flex flex-row gap-4 items-center justify-center text-white font-black">
                     <FaUser className="text-2xl" />
                     <h2 className="hidden md:block">{user?.nome ?? 'Default'}</h2>
                 </div>
@@ -95,7 +99,7 @@ const Home = ({ user, children }: Props) => {
                 {children}
             </main>
 
-            <footer className="w-screen px-[10vw] py-4 absolute left-0 bottom-0 transform-y translate-y-0 bg-gray-600 text-[0.8rem] text-center z-50">
+            <footer className="w-screen px-[10vw] absolute bottom-0 py-4 bg-gray-600 text-[0.8rem] text-center z-50">
                 <h1>Todos os direitos reservados.</h1>
             </footer>
         </>

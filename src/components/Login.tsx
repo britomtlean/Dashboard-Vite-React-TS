@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { FetchLogin } from '../data/FetchLogin';
 import { useNavigate, Link } from 'react-router-dom';
@@ -31,6 +31,16 @@ const Login = () => {
             .catch((er) => alert(er));
     };
 
+    const handleDefault = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        FetchLogin.sendDefault().then(() => {
+            navigate('/');
+        })
+        .catch((er) => alert(er));
+
+    };
+
     const handleCPFChange = (e: ChangeEvent<HTMLInputElement>) => {
         setCPF(e.target.value);
     };
@@ -39,12 +49,9 @@ const Login = () => {
         setPassword(e.target.value);
     };
 
-    useEffect(() => {
-        console.log('Login montado');
-    }, []);
 
     return (
-        <div className="w-screen h-screen flex items-center justify-center bg-linear-to-br from-gray-700 to-gray-500 px-[10vw]">
+        <div className="w-screen h-screen flex flex-col gap-8 items-center justify-center bg-linear-to-br from-gray-700 to-gray-500 px-[10vw]">
             <div
                 className="w-full max-w-md p-8 rounded-2xl shadow-lg
                  bg-white/10 backdrop-blur-md"
@@ -88,11 +95,25 @@ const Login = () => {
                         Entrar
                     </button>
 
-                    <Link to={'/cadastro'} className="text-white font-light decoration-zinc-400 underline">
-                        Não possui cadastro?
+                    <Link to={'/cadastro'} className="text-gray-900 font-sans decoration-black underline">
+                        Cadastre-se
                     </Link>
                 </form>
             </div>
+
+            <form onSubmit={(e) => handleDefault(e)} className="p-4">
+                <input
+                    value={'Entre como convidado'}
+                    type="submit"
+                    className="min-w-1/2 mt-2 bg-blue-600 text-white font-semibold py-3 rounded-lg animate-bounce px-4
+                        hover:bg-blue-700
+                        transition duration-200
+                        focus:outline-none
+                        focus:ring-2 focus:ring-cyan-500
+                        focus:border-white
+                        md:min-w-1/6"
+                ></input>
+            </form>
         </div>
     );
 };
