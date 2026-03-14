@@ -92,7 +92,7 @@ const Home = ({ children }: Props) => {
                     onClick={clickConfig}
                 >
                     <div
-                        className={`absolute top-20 right-0 w-1/2 min-h-1/4 bg-gray-700/90 z-50 text-center text-[0.7rem] p-4
+                        className={`absolute top-20 right-0 w-1/2 max-h-1/3 bg-gray-700 z-50 text-center text-[0.7rem] p-4
                         border-r border-sky-300 shadow-[2px_0px_3px_#010100,2px_0px_10px_#000000,0_0px_5px_#FFFFFF]
                         transform transition-all duration-700 ease-in-out
                         md:w-100 md:text-[1.0rem]
@@ -106,19 +106,18 @@ const Home = ({ children }: Props) => {
                 </button>
             </header>
 
-            <div
-                className={`transform transition-all duration-500 ease-out
-                    ${menu ? 'absolute w-screen min-h-screen bg-black/60 ' : 'opacity-0 invisible'}`}
-                onClick={() => {
-                    (setMenu(false), setConfiig(false));
-                }}
-            ></div>
-
             <main
-                className={`flex-1 w-screen min-h-screen py-4 px-[5vw] flex flex-col justify-start items-center
-                transform transition-all delay-300 ease-in-out
-                ${!theme ? 'bg-gray-400' : 'bg-gray-700'}
-                md:px-[10xw]`}
+                className={`flex-1 w-screen min-h-screen h-full py-4 px-[5vw] flex flex-col justify-start items-center
+                            transform transition-all delay-300 ease-in-out relative
+                            ${!theme ? 'bg-gray-400' : 'bg-gray-700'}
+                            md:px-[10vw]
+                            before:content-[''] before:absolute before:inset-0 before:bg-black/70 before:min-h-screen
+                            before:transition-opacity before:duration-500 before:delay-75
+                            ${menu || config ? 'before:opacity-100' : 'before:opacity-0'}
+                        `}
+                onClick={() => {
+                    (setConfiig(false), setMenu(false));
+                }}
             >
                 {children}
             </main>

@@ -8,9 +8,9 @@ import './index.css';
 import App from './App.tsx';
 
 //Hooks
-import Ref from './components/Hooks/Ref.tsx';
-import State from './components/Hooks/State.tsx';
-import Effect from './components/Hooks/Effect.tsx';
+import Ref from './components/React-Hooks/Ref.tsx';
+import State from './components/React-Hooks/State.tsx';
+import Effect from './components/React-Hooks/Effect.tsx';
 
 import Tarefas from './components/Tarefas.tsx';
 import Login from './components/Login.tsx';

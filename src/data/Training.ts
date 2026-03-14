@@ -22,7 +22,7 @@ export class Treining {
             throw Error(data.message);
         }
 
-        console.log('dados recebidos:', data);
+        console.log('Dados recebidos:', data);
         return data;
     }
 }
