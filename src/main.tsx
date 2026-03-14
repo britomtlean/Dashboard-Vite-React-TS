@@ -20,6 +20,7 @@ import { ContextProvider } from './context/ContextProvider';
 //import Welcome from './components/Welcome.tsx';
 import ErrorPage from './components/ErrorPage.tsx';
 import Sobre from './components/Sobre.tsx';
+import Treino from './components/Treino.tsx';
 
 let router = createBrowserRouter([
     {
@@ -55,6 +56,10 @@ let router = createBrowserRouter([
                 path: '/tarefas/',
                 element: <Tarefas />,
             },
+            {
+                path: '/treino',
+                element: <Treino/>
+            }
         ],
     },
 ]);
