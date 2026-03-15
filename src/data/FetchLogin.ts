@@ -14,10 +14,15 @@ export class FetchLogin {
             ? 'http://localhost:3000/auth/validate'
             : 'https://back-end-dashboard-production.up.railway.app/auth/validate';
 
+    private static readonly httpUpdateProfile =
+        window.location.hostname === 'localhost'
+            ? 'http://localhost:3000/usuarios/update'
+            : 'https://back-end-dashboard-production.up.railway.app/usuarios/update';
+
     private static readonly default = {
         cpf: 'Default',
-        senha: '1234'
-    }
+        senha: '1234',
+    };
 
     //////////////////////////////////////////////////////////////////////////////
 
@@ -60,7 +65,6 @@ export class FetchLogin {
     }
 
     static async getProfile(): Promise<LoggedUser> {
-
         const token: string = await getToken();
 
         const res = await fetch(this.httpGetProfile, {
@@ -80,12 +84,11 @@ export class FetchLogin {
         return data;
     }
 
-    static async updateProfile(user: UpdateUser): Promise<Record<string, any>>{
-
+    static async updateProfile(user: UpdateUser): Promise<Record<string, any>> {
         const token: string = await getToken();
-        console.log('token recebido:', token)
+        console.log('token recebido:', token);
 
-        const res = await fetch('http://localhost:3000/usuarios/update', {
+        const res = await fetch(this.httpUpdateProfile, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -95,13 +98,13 @@ export class FetchLogin {
             body: JSON.stringify(user),
         });
 
-        const data = await res.json()
+        const data = await res.json();
 
-        if(!res.ok){
-            throw new Error(data.message)
+        if (!res.ok) {
+            throw new Error(data.message);
         }
 
-        console.log("Dados recebidos:", data)
-        return data
+        console.log('Dados recebidos:', data);
+        return data;
     }
 }
