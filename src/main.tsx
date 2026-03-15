@@ -21,6 +21,7 @@ import { ContextProvider } from './context/ContextProvider';
 import ErrorPage from './components/ErrorPage.tsx';
 import Sobre from './components/Sobre.tsx';
 import Treino from './components/Treino.tsx';
+import UpdateProfile from './components/profile/UpdateProfile.tsx';
 
 let router = createBrowserRouter([
     {
@@ -34,11 +35,11 @@ let router = createBrowserRouter([
     {
         path: '/',
         element: <App />,
-        errorElement: <ErrorPage/>,
+        errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
-                element: <Sobre/>
+                element: <Sobre />,
             },
             {
                 path: '/state',
@@ -58,8 +59,12 @@ let router = createBrowserRouter([
             },
             {
                 path: '/treino',
-                element: <Treino/>
-            }
+                element: <Treino />,
+            },
+            {
+                path: '/update-profile',
+                element: <UpdateProfile />,
+            },
         ],
     },
 ]);

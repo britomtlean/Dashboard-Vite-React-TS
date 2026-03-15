@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 //ICONS
 import { VscColorMode } from 'react-icons/vsc';
@@ -19,8 +19,12 @@ type Props = {
 };
 
 const Home = ({ children }: Props) => {
+
     //CONTEXT
     const { theme, setTheme, user } = useContext(Context)!;
+
+    //ROUTER
+    const navigate = useNavigate()
 
     //STATE
     const [menu, setMenu] = useState<boolean>(false);
@@ -86,7 +90,7 @@ const Home = ({ children }: Props) => {
                     <h1 className="font-black text-white">Theme</h1>
                 </button>
 
-                <button
+                <div
                     data-element="User"
                     className="flex flex-row gap-4 items-center justify-center text-white font-black p-4 bg-gray-400/60 rounded-[100%] focus:bg-slate-600"
                     onClick={clickConfig}
@@ -101,9 +105,10 @@ const Home = ({ children }: Props) => {
                         <h2>{user?.nome}</h2>
                         <h2>{user?.email}</h2>
                         <h2>{user?.cpf}</h2>
+                        <button className='w-1/2 p-1 mt-2 bg-slate-400 rounded-lg' onClick={() => { navigate('/update-profile')}}>Editar</button>
                     </div>
                     <FaUser className="text-2xl" />
-                </button>
+                </div>
             </header>
 
             <main

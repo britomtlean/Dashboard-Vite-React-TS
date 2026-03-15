@@ -1,4 +1,6 @@
 import { getToken } from "../services/functions";
+import type { UpdateUser } from "../types/AuthBody";
+import type { LoggedUser } from "../types/LoggedUser";
 
 export class FetchLogin {
     //////////////////////////////////////////////////////////////////////////////
@@ -57,8 +59,9 @@ export class FetchLogin {
         return data;
     }
 
-    static async getProfile(): Promise<Record<string, any>> {
-        const token: string | null = await getToken();
+    static async getProfile(): Promise<LoggedUser> {
+
+        const token: string = await getToken();
 
         const res = await fetch(this.httpGetProfile, {
             method: 'GET',
@@ -75,5 +78,30 @@ export class FetchLogin {
 
         console.log('Usuário logado:', data);
         return data;
+    }
+
+    static async updateProfile(user: UpdateUser): Promise<Record<string, any>>{
+
+        const token: string = await getToken();
+        console.log('token recebido:', token)
+
+        const res = await fetch('http://localhost:3000/usuarios/update', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${JSON.parse(token)}`,
+            },
+            credentials: 'include',
+            body: JSON.stringify(user),
+        });
+
+        const data = await res.json()
+
+        if(!res.ok){
+            throw new Error(data.message)
+        }
+
+        console.log("Dados recebidos:", data)
+        return data
     }
 }
