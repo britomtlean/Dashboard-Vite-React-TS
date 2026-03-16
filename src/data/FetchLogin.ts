@@ -86,7 +86,6 @@ export class FetchLogin {
 
     static async updateProfile(user: UpdateUser): Promise<Record<string, any>> {
         const token: string = await getToken();
-        console.log('token recebido:', token);
 
         const res = await fetch(this.httpUpdateProfile, {
             method: 'PUT',

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { FaUser } from 'react-icons/fa6';
 import { Context } from '../../context/ContextProvider';
 import type { UpdateUser } from '../../types/AuthBody';
@@ -7,19 +7,19 @@ import { FetchLogin } from '../../data/FetchLogin';
 //CONTEXT
 
 const UpdateProfile = () => {
-    //CONTEXT
+
+    //CONTEXT *************************************************************
     const { user, setUser } = useContext(Context)!;
 
-    //REF
+    //REFS ****************************************************************
     const nameRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
     const editRef = useRef<HTMLButtonElement>(null);
     const saveRef = useRef<HTMLInputElement>(null);
 
-    const [render, setRender] = useState<boolean>(true);
+    //FUNCTIONS ************************************************************
 
-    function handleEdit(e: any) {
-        e.preventDefault();
+    function handleEdit() {
 
         nameRef.current!.disabled = false;
         nameRef.current!.required = true;
@@ -36,7 +36,7 @@ const UpdateProfile = () => {
         saveRef.current!.style.display = 'block';
     }
 
-    function handleSave(e: any) {
+    function handleSave(e: React.FormEvent) {
         e.preventDefault();
 
         const userInput: UpdateUser = {
@@ -44,45 +44,53 @@ const UpdateProfile = () => {
             email: emailRef.current?.value!,
         };
 
-        console.log('Dados recebidos:', userInput);
+        console.log('Dados Enviados:', userInput, new Date());
 
         FetchLogin.updateProfile(userInput)
             .then(() => {
-                (alert('Usuário Atualizado!'), setRender((prev) => !prev));
+                (alert('Usuário Atualizado!'),
+                    FetchLogin.getProfile()
+                        .then((data) => setUser(data))
+                        .catch((er) => {
+                            console.error(er);
+                        }));
             })
             .catch((err) => alert(err));
     }
 
-    useEffect(() => {
-        FetchLogin.getProfile()
-            .then((data) => setUser(data))
-            .catch((er) => {
-                console.error(er);
-            });
-    }, [render]);
+    /******************************************************************** */
+
+    //EFFECT **************************************************************/
 
     useEffect(() => {
-        ((nameRef.current!.disabled = true),
-            (nameRef.current!.value = ''),
-            (emailRef.current!.disabled = true),
-            (emailRef.current!.value = ''),
-            (editRef.current!.style.display = 'block'),
-            (saveRef.current!.style.display = 'none'),
-            console.log('Componente UpdateProfile Renderizou'));
-    }, [render]);
+        console.log('Componente UpdateProfile Renderizou');
+
+        if (!nameRef.current || !emailRef.current) return;
+
+        nameRef.current.disabled = true;
+        nameRef.current.value = '';
+
+        emailRef.current.disabled = true;
+        emailRef.current.value =  '';
+
+        if (editRef.current) editRef.current.style.display = 'block';
+        if (saveRef.current) saveRef.current.style.display = 'none';
+    }, [user]);
+
+    /******************************************************************** */
 
     return (
-        <div className=" w-full mt-8 min-h-full bg-gray-300 flex flex-col justify-start items-center gap-4 rounded-[50px] py-20
-        md:w-2/3">
+        <div
+            className=" w-full mt-8 min-h-full bg-gray-300 flex flex-col justify-start items-center gap-4 rounded-[50px] py-20
+                md:w-2/3"
+        >
             <div>
                 <FaUser className="text-5xl" />
             </div>
 
             <form
                 className="w-9/10 flex flex-col justify-center items-center gap-4 text-center text-2xl p-4 "
-                onSubmit={(e) => {
-                    handleEdit(e);
-                }}
+                onSubmit={handleSave}
             >
                 <input
                     className="border w-full border-white bg-sky-100 text-center rounded-[20px] p-4 focus:outline-blue-500 focus:outline-1
@@ -114,17 +122,12 @@ const UpdateProfile = () => {
                     className="border w-full border-white bg-sky-500 text-center rounded-[20px] p-4 text-white
                     md:w-2/3"
                     ref={editRef}
-                    type="submit"
+                    type="button"
+                    onClick={handleEdit}
                 >
                     Editar
                 </button>
-            </form>
-            <form
-                className="w-9/10 flex justify-center"
-                onSubmit={(e) => {
-                    handleSave(e);
-                }}
-            >
+
                 <input
                     className="hidden border w-full border-white bg-sky-500 text-center rounded-[20px] p-4 text-white
                     md:w-2/3"
