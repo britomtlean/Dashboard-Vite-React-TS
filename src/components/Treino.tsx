@@ -8,8 +8,8 @@ const Treino = () => {
         <div className="min-h-screen text-white p-6 flex justify-center w-full">
             <div className="w-full max-w-3xl space-y-6">
                 {dados.length == 0 || !dados ? (
-                    <div className="text-center text-gray-400 text-lg min-h-full w-full">
-                        <h1 className='text-4xl'>Não há dados disponíveis</h1>
+                    <div className="text-center text-lg min-h-full w-full">
+                        <h1 className='text-4xl text-black'>Não há dados disponíveis</h1>
                     </div>
                 ) : (
                     <div className="space-y-6">

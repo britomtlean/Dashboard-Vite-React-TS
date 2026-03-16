@@ -92,7 +92,7 @@ export default function Sobre() {
 
     return (
         <section className="w-full max-w-4xl">
-            <h1 className="text-2xl sm:text-4xl font-bold text-center mb-8 text-yellow-600">Especificações do Projeto</h1>
+            <h1 className="text-2xl sm:text-4xl font-bold text-center mb-8 text-green-700">Especificações do Projeto</h1>
 
             <div className="bg-slate-900 rounded-xl p-4 sm:p-8 shadow-lg border border-slate-800">
                 <h2 className={`text-xl sm:text-2xl font-semibold mb-4 ${current.color}`}>{current.title}</h2>
