@@ -1,19 +1,48 @@
 import useTraining from '../../hooks/useTraining';
 import { useNavigate } from 'react-router-dom';
-import type { TrainingBody } from '../../types/Training';
+import { DiaSemana } from '../../types/EnumDiaSemana';
+import { useEffect, useRef, useState } from 'react';
 
 
 const DiaTreino = () => {
-    //Hooks
-     const { musculos, exercises, dados } = useTraining();
+
+    //************************* Data ********************************
+    const date = new Date();
+    const today: number = Number(date.getDay() + 1);
+    console.log('hoje é:', today);
+
+    const [day, setDay] = useState<number>(today);
+
+    //************************** Alterar Data **************************/
+    const refDia = useRef<HTMLSelectElement | null>(null);
+
+    const handleAlterDay = ()  => {
+
+        if(!refDia.current) return
+
+        const diaSelect = Number(refDia.current.value);
+        setDay(diaSelect)
+    }
+
+    //Router
     const navigate = useNavigate();
 
-    const traninings: Array<TrainingBody> = [];
+    //CustomHooks
+    const { musculos, exercises, treinos } = useTraining();
+
+    //*********************** Filtrar treinos por dia*********************** */
+    const treinosFiltrados = treinos.filter((treino) => treino.diaSemana == day);
+
+    /********************************* Renderização ***************************/
+    useEffect(() => {
+        console.log('DiaTreino renderizou');
+        console.log('Dia selecionad: ' +day)
+    }, [day]);
 
     return (
-        <div className="min-h-screen text-white p-6 flex justify-center w-full">
+        <div className="min-h-screen p-6 flex justify-center w-full">
             <div className="w-full max-w-3xl space-y-6">
-                {dados.length == 0 || !dados ? (
+                {treinosFiltrados.length == 0 || !treinos ? (
                     <div className="text-center text-lg min-h-full w-full">
                         <h1 className="text-[1.2rem] text-black">Não há dados disponíveis</h1>
                         <div>
@@ -28,8 +57,22 @@ const DiaTreino = () => {
                         </div>
                     </div>
                 ) : (
-                    <div className="space-y-6">
-                        {dados.map((treino) => (
+                    <div className="space-y-4">
+                        <h1>Dia da semana</h1>
+
+                        <select ref={refDia} className="bg-gray-200 p-2 w-full" onChange={handleAlterDay} required>
+                            <option value="">Selecione um dia:</option>
+
+                            <option value={DiaSemana.Domingo}>Domingo</option>
+                            <option value={DiaSemana.Segunda}>Segunda-feira</option>
+                            <option value={DiaSemana.Terca}>Terça-feira</option>
+                            <option value={DiaSemana.Quarta}>Quarta-feira</option>
+                            <option value={DiaSemana.Quinta}>Quinta-feira</option>
+                            <option value={DiaSemana.Sexta}>Sexta-feira</option>
+                            <option value={DiaSemana.Sabado}>Sábado</option>
+                        </select>
+
+                        {treinosFiltrados.map((treino) => (
                             <div
                                 key={treino.id}
                                 className="treino bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-700"
@@ -72,6 +115,6 @@ const DiaTreino = () => {
             </div>
         </div>
     );
-};
+};;;;
 
 export default DiaTreino;

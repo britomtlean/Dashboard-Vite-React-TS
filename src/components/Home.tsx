@@ -67,14 +67,8 @@ const Home = ({ children }: Props) => {
                         <Link className="w-full py-3 text-center" to={'/'} onClick={() => setMenu(false)}>
                             Home
                         </Link>
-                        <Link className="w-full py-3 text-center" to={'/effect'} onClick={() => setMenu(false)}>
-                            useEffect
-                        </Link>
-                        <Link className="w-full py-3 text-center" to={'/state'} onClick={() => setMenu(false)}>
-                            useState
-                        </Link>
-                        <Link className="w-full py-3 text-center" to={'/ref'} onClick={() => setMenu(false)}>
-                            useRef
+                        <Link className="w-full py-3 text-center" to={'/hooks'} onClick={() => setMenu(false)}>
+                            Hooks
                         </Link>
                         <Link className="w-full py-3 text-center" to={'/tarefas'} onClick={() => setMenu(false)}>
                             Tarefas
@@ -105,7 +99,14 @@ const Home = ({ children }: Props) => {
                         <h2>{user?.nome}</h2>
                         <h2>{user?.email}</h2>
                         <h2>{user?.cpf}</h2>
-                        <button className='w-1/2 p-1 mt-2 bg-slate-400 rounded-lg' onClick={() => { navigate('/update-profile')}}>Editar</button>
+                        <button
+                            className="w-1/2 p-1 mt-2 bg-slate-400 rounded-lg"
+                            onClick={() => {
+                                navigate('/update-profile');
+                            }}
+                        >
+                            Editar
+                        </button>
                     </div>
                     <FaUser className="text-2xl" />
                 </div>

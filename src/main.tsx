@@ -8,9 +8,9 @@ import './index.css';
 import App from './App.tsx';
 
 //Hooks
-import Ref from './components/React-Hooks/Ref.tsx';
-import State from './components/React-Hooks/State.tsx';
-import Effect from './components/React-Hooks/Effect.tsx';
+import Ref from './components/hooks/Ref.tsx';
+import State from './components/hooks/State.tsx';
+import Effect from './components/hooks/Effect.tsx';
 
 //COMPONENTS
 import ErrorPage from './components/ErrorPage.tsx';
@@ -26,6 +26,7 @@ import { ContextProvider } from './context/ContextProvider';
 import CreateTreino from './components/training/CreateTreino.tsx';
 import MenuTreino from './components/training/MenuTreino.tsx';
 import DiaTreino from './components/training/DiaTreino.tsx';
+import SelectHook from './components/hooks/SelectHook.tsx';
 
 let router = createBrowserRouter([
     {
@@ -44,6 +45,10 @@ let router = createBrowserRouter([
             {
                 index: true,
                 element: <Sobre />,
+            },
+            {
+                path: '/hooks',
+                element: <SelectHook />,
             },
             {
                 path: '/state',

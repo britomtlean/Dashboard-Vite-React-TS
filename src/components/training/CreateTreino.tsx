@@ -6,26 +6,26 @@ import useTraining from '../../hooks/useTraining';
 
 const CreateTreino = () => {
 
-     const { musculos, exercises, dados } = useTraining();
+     const { musculos } = useTraining();
 
 
-    const valueMusculo = useRef<HTMLSelectElement | null>(null);
-    const valueDia = useRef<HTMLSelectElement | null>(null);
+    const refMusculo = useRef<HTMLSelectElement | null>(null);
+    const refDia = useRef<HTMLSelectElement | null>(null);
 
 
     const handleCreateTrainningBody = () => {
-        if (!valueMusculo.current || !valueDia.current) {
+        if (!refMusculo.current || !refDia.current) {
             return
         }
 
-        if (!valueMusculo.current!.value || !valueDia.current!.value) {
+        if (!refMusculo.current!.value || !refDia.current!.value) {
             alert('Dados inválidos!');
             return
         }
 
         const newTraining: TrainingBody = {
-            diaSemana: Number(valueDia.current?.value),
-            musculo: Number(valueMusculo.current?.value),
+            diaSemana: Number(refDia.current?.value),
+            musculo: Number(refMusculo.current?.value),
         };
 
         console.log('Treino criado:', newTraining);
@@ -37,7 +37,7 @@ const CreateTreino = () => {
     return (
         <div className="flex flex-col gap-2 justify-center items text-left w-full">
             <h1>Dia da semana</h1>
-            <select ref={valueDia} className="bg-white p-2" required>
+            <select ref={refDia} className="bg-white p-2" required>
                 <option value="">Selecione um dia:</option>
 
                 <option value={DiaSemana.Domingo}>Domingo</option>
@@ -50,7 +50,7 @@ const CreateTreino = () => {
             </select>
 
             <h1>Musculo:</h1>
-            <select ref={valueMusculo} className="bg-white p-2" name="" id="" required>
+            <select ref={refMusculo} className="bg-white p-2" name="" id="" required>
                 <option value="">Selecione um musculo:</option>
                 {Array.isArray(musculos) &&
                     musculos.map((array) => (
