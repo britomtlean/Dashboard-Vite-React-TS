@@ -2,15 +2,17 @@ import { getToken } from '../services/functions';
 import type { ExerciseBody, TrainingBody } from '../types/Training';
 
 export class Training {
-    private static readonly urlGetAllTrainings: string = `${import.meta.env.VITE_API_URL}training/getday`;
+    private static readonly urlGetAllTrainings: string = `${import.meta.env.VITE_API_URL}training/get-alltrainings`;
 
-    private static readonly urlGetMusculos: string = `${import.meta.env.VITE_API_URL}training/getTypes`;
+    private static readonly urlGetMusculos: string = `${import.meta.env.VITE_API_URL}training/get-muscles`;
 
-    private static readonly urlGetExercises: string = `${import.meta.env.VITE_API_URL}training/getExercises`;
+    private static readonly urlGetExercises: string = `${import.meta.env.VITE_API_URL}training/get-exercises`;
 
-    private static readonly urlAddTraining: string = `${import.meta.env.VITE_API_URL}training/create`;
+    private static readonly urlAddTraining: string = `${import.meta.env.VITE_API_URL}training/post-training`;
 
-    private static readonly urlAddExercise: string = `${import.meta.env.VITE_API_URL}training/add`;
+    private static readonly urlAddExercise: string = `${import.meta.env.VITE_API_URL}training/post-exercise`;
+
+    private static readonly urlADeleteTraining: string = `${import.meta.env.VITE_API_URL}training/delete-training`
 
     static async getAllTrainings() {
         const token = await getToken();
@@ -129,6 +131,35 @@ export class Training {
         }
 
         console.log('Response addExercices:', data);
+        return data;
+    }
+
+    static async removeTraining(body: number) {
+        const req = JSON.stringify({id: body});
+        console.log('Dados enviados:', req);
+
+        if (!req) {
+            throw new Error('Dados de requisição inválidos!');
+        }
+
+        const token = await getToken();
+
+        const res = await fetch(this.urlADeleteTraining, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${JSON.parse(token)}`,
+            },
+            body: req,
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            throw new Error(data.message || 'Erro de serviço');
+        }
+
+        console.log('Response removeTraining:', data);
         return data;
     }
 }

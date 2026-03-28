@@ -81,20 +81,21 @@ const UpdateProfile = () => {
 
     return (
         <div
-            className=" w-full mt-8 min-h-full bg-gray-300 flex flex-col justify-start items-center gap-4 rounded-[50px] py-20
-                md:w-2/3"
+            className=" w-full mt-8 min-h-full bg-slate-700/60 flex flex-col justify-start items-center gap-4 rounded-[50px] py-20
+                md:w-1/3"
         >
             <div>
                 <FaUser className="text-5xl" />
             </div>
 
             <form
-                className="w-9/10 flex flex-col justify-center items-center gap-4 text-center text-2xl p-4 "
+                className="w-9/10 flex flex-col justify-center items-center gap-4 text-center
+                md:text-2xl md:p-4 "
                 onSubmit={handleSave}
             >
                 <input
-                    className="border w-full border-white bg-sky-100 text-center rounded-[20px] p-4 focus:outline-blue-500 focus:outline-1
-                    md:w-2/3"
+                    className="border w-full border-white bg-sky-100 text-center rounded-[10px] p-2 focus:outline-blue-500 focus:outline-1
+                    md:w-full"
                     type="text"
                     name="name"
                     placeholder={user?.nome}
@@ -102,8 +103,8 @@ const UpdateProfile = () => {
                     ref={nameRef}
                 />
                 <input
-                    className="border w-full border-white bg-sky-100 text-center rounded-[20px] p-4 focus:outline-blue-500 focus:outline-1
-                    md:w-2/3"
+                    className="border w-full border-white bg-sky-100 text-center rounded-[10px] p-2 focus:outline-blue-500 focus:outline-1
+                    md:w-full"
                     type="text"
                     name="email"
                     placeholder={user?.email}
@@ -111,16 +112,16 @@ const UpdateProfile = () => {
                     ref={emailRef}
                 />
                 <input
-                    className="border w-full border-white bg-sky-100 text-center rounded-[20px] p-4  focus:outline-blue-500 focus:outline-1
-                    md:w-2/3"
+                    className="border w-full border-white bg-sky-100 text-center rounded-[10px] p-2  focus:outline-blue-500 focus:outline-1
+                    md:w-full"
                     type="text"
                     name="cpf"
                     placeholder={user?.cpf}
                     disabled
                 />
                 <button
-                    className="border w-full border-white bg-sky-500 text-center rounded-[20px] p-4 text-white
-                    md:w-2/3"
+                    className="w-full bg-sky-500 text-center rounded-[10px] p-2 text-white
+                    md:w-full"
                     ref={editRef}
                     type="button"
                     onClick={handleEdit}
@@ -129,7 +130,7 @@ const UpdateProfile = () => {
                 </button>
 
                 <input
-                    className="hidden border w-full border-white bg-sky-500 text-center rounded-[20px] p-4 text-white
+                    className="hidden w-full bg-sky-500 text-center rounded-[10px] p-2 text-white
                     md:w-2/3"
                     type="submit"
                     value={'Salvar'}

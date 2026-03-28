@@ -2,8 +2,11 @@ import useTraining from '../../hooks/useTraining';
 import { useNavigate } from 'react-router-dom';
 import { DiaSemana } from '../../types/EnumDiaSemana';
 import { useEffect, useRef, useState } from 'react';
+import { Training } from '../../data/Training';
 
 const DiaTreino = () => {
+    const [render, setRender] = useState<boolean>(false);
+
     //************************* Data ********************************
     const date = new Date();
     const today: number = Number(date.getDay() + 1);
@@ -25,7 +28,7 @@ const DiaTreino = () => {
     const navigate = useNavigate();
 
     //CustomHooks
-    const { treinos } = useTraining();
+    const { treinos, setTreinos } = useTraining();
 
     //*********************** Filtrar treinos por dia*********************** */
     const treinosFiltrados = treinos.filter((treino) => treino.diaSemana == day);
@@ -36,11 +39,16 @@ const DiaTreino = () => {
         console.log('Dia selecionad: ' + day);
     }, [day]);
 
+    useEffect(() => {
+        Training.getAllTrainings().then((data) => setTreinos(data))
+    }, [render]);
+
     return (
         <div className="w-full h-full max-w-3xl space-y-2">
             <select
                 ref={refDia}
-                className="bg-slate-800 p-2 w-full text-white font-bold border text-center my-6"
+                className="bg-slate-800 p-2.5 w-full text-white font-bold border text-center my-6
+                md:p-2"
                 value={day}
                 onChange={handleAlterDay}
                 required
@@ -85,16 +93,28 @@ const DiaTreino = () => {
                             </div>
 
                             <h3 className="text-lg font-semibold text-gray-200">Exercícios</h3>
-                            <button
-                                className="btn-secondary my-4"
-                                onClick={() => {
-                                    navigate(
-                                        `/novo-exercicio/${treino.id}/${treino.TipoTreino.nome}/${DiaSemana[treino.diaSemana]}`
-                                    );
-                                }}
-                            >
-                                Adicionar exercicio
-                            </button>
+
+                            <div className="w-full my-4 space-y-2">
+                                <button
+                                    className="btn-secondary w-full"
+                                    onClick={() => {
+                                        navigate(
+                                            `/novo-exercicio/${treino.id}/${treino.TipoTreino.nome}/${DiaSemana[treino.diaSemana]}`
+                                        );
+                                    }}
+                                >
+                                    Adicionar exercicio
+                                </button>
+
+                                <button
+                                    className="btn-remove w-full"
+                                    onClick={() => {
+                                        Training.removeTraining(treino.id).then(() => {alert('Treino Deletado'), setRender((prev) => !prev)});
+                                    }}
+                                >
+                                    Deletar treino
+                                </button>
+                            </div>
 
                             <div className="space-y-4">
                                 {treino.Exercicio.map((exercicio: any) => (

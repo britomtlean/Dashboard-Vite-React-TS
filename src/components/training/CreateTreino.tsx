@@ -3,8 +3,11 @@ import type { TrainingBody } from '../../types/Training';
 import { Training } from '../../data/Training';
 import { DiaSemana } from '../../types/EnumDiaSemana'
 import useTraining from '../../hooks/useTraining';
+import { useNavigate } from 'react-router-dom';
 
 const CreateTreino = () => {
+
+    const navigate = useNavigate();
 
      const { musculos } = useTraining();
 
@@ -30,12 +33,13 @@ const CreateTreino = () => {
 
         console.log('Treino criado:', newTraining);
         Training.addTraining(newTraining)
-            .then(() => console.log('ok'))
+            .then(() => { (alert('Treino criado com sucesso!'), navigate('/treino-do-dia'));})
             .catch((err) => alert(err));
     };
 
     return (
-        <div className="flex flex-col gap-2 justify-center items text-left w-full">
+        <div className="flex flex-col gap-2 justify-center items text-left w-full
+            md:w-1/2">
             <h1>Dia da semana</h1>
             <select ref={refDia} className="bg-white p-2" required>
                 <option value="">Selecione um dia:</option>

@@ -57,13 +57,13 @@ const NewExercise = () => {
     return (
         <div className="space-y-3.5">
             <h1 className="font-mono">
-                Treino selecionado: <span className="font-extrabold text-white">{params.id}</span>
+                Treino: <span className="font-extrabold text-white">{params.id}</span>
             </h1>
             <h1 className="font-mono">
-                Dia selecionado: <span className="font-extrabold text-white">{params.dia}</span>
+                Dia: <span className="font-extrabold text-white">{params.dia}</span>
             </h1>
             <h1 className="font-mono">
-                Musculo selecionado: <span className="font-extrabold text-white">{params.musculo}</span>
+                Musculo: <span className="font-extrabold text-white">{params.musculo}</span>
             </h1>
             <h1 className="font-mono">Exercicios:</h1>
             {exercises.length == 0 ? (
